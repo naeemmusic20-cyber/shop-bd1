@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Shop BD - Shop Smart, Live Better | NM Shop BD",
+  "description": "Shop BD (NM Shop BD) is Bangladesh\u0027s leading online shopping destination for electronics, fashion, lifestyle, and home appliances with fast delivery and secure payments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

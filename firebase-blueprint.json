@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "User": {
+      "fields": {
+        "id": "string",
+        "email": "string",
+        "displayName": "string",
+        "phoneNumber": "string",
+        "photoURL": "string",
+        "role": "string",
+        "status": "string",
+        "createdAt": "string"
+      }
+    },
+    "Product": {
+      "fields": {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "images": "string[]",
+        "price": "number",
+        "salePrice": "number",
+        "discount": "number",
+        "stock": "number",
+        "sku": "string",
+        "category": "string",
+        "subcategory": "string",
+        "brand": "string",
+        "variants": "object",
+        "sizes": "string[]",
+        "colors": "string[]",
+        "rating": "number",
+        "reviewsCount": "number",
+        "isFeatured": "boolean",
+        "isFlashSale": "boolean",
+        "isTrending": "boolean",
+        "isBestSeller": "boolean",
+        "isWholesale": "boolean",
+        "createdAt": "string"
+      }
+    },
+    "Category": {
+      "fields": {
+        "id": "string",
+        "name": "string",
+        "slug": "string",
+        "image": "string",
+        "subcategories": "string[]",
+        "status": "string",
+        "sortOrder": "number",
+        "seoTitle": "string",
+        "seoDescription": "string"
+      }
+    },
+    "Order": {
+      "fields": {
+        "id": "string",
+        "userId": "string",
+        "customerName": "string",
+        "customerPhone": "string",
+        "customerEmail": "string",
+        "address": "string",
+        "district": "string",
+        "area": "string",
+        "deliveryMethod": "string",
+        "deliveryCharge": "number",
+        "paymentMethod": "string",
+        "paymentStatus": "string",
+        "transactionId": "string",
+        "status": "string",
+        "subtotal": "number",
+        "discount": "number",
+        "total": "number",
+        "items": "object[]",
+        "orderNotes": "string",
+        "createdAt": "string"
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

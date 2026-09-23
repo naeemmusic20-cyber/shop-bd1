@@ -1,0 +1,136 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Strictly authorized Admin check (includes designated UIDs and verified runtime admin email)
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.uid == 'ppTi925jz3g5W2QS5lJHWwe3vwE3' ||
+        request.auth.uid == 'tiS8mkXAhudP25KKxQwv9t4q09f1' ||
+        request.auth.token.email == 'naeemmusic2.0@gmail.com'
+      );
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Public read for storefront catalogs
+    match /products/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /categories/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /subcategories/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /brands/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /banners/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /collections/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /flash_sales/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /social_links/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /delivery_zones/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /coupons/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Reviews can be read by all, created by authenticated users
+    match /reviews/{docId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+    }
+
+    // User profile and addresses
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+    match /addresses/{addressId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // Carts and wishlists
+    match /carts/{cartId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+    match /wishlists/{wishlistId} {
+      allow read, write: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // Orders
+    match /orders/{orderId} {
+      allow create: if true; // Allows guest or authenticated checkout
+      allow read: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+    match /order_items/{itemId} {
+      allow create: if true;
+      allow read: if isAdmin() || isAuthenticated();
+      allow update, delete: if isAdmin();
+    }
+
+    // Payments & Coupon usage
+    match /payments/{paymentId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    match /coupon_usage/{usageId} {
+      allow read, write: if isAuthenticated() || isAdmin();
+    }
+
+    // Support tickets and messages
+    match /support_tickets/{ticketId} {
+      allow read: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow create: if isAuthenticated() || true;
+      allow update, delete: if isAdmin();
+    }
+    match /support_messages/{messageId} {
+      allow read, create: if isAuthenticated() || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Notifications & Newsletter
+    match /notifications/{notificationId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /newsletter_subscribers/{subId} {
+      allow create: if true;
+      allow read, write: if isAdmin();
+    }
+  }
+}

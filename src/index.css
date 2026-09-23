@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SHOP BD ADMIN PORTAL GLOBAL COLOR & CONTRAST SYSTEM
+   Guarantees 100% visible, high-contrast, crisp text and controls across
+   all tabs, inputs, modals, labels, dropdowns, and cards.
+   ========================================================================== */
+
+.admin-portal-wrapper {
+  color: #0f172a;
+}
+
+/* Ensure all form controls inside light admin cards/modals are razor sharp */
+.admin-portal-wrapper .bg-white input,
+.admin-portal-wrapper .bg-white select,
+.admin-portal-wrapper .bg-white textarea,
+.admin-portal-wrapper .bg-slate-50 input,
+.admin-portal-wrapper .bg-slate-50 select,
+.admin-portal-wrapper .bg-slate-50 textarea,
+.admin-portal-wrapper form input:not([type="checkbox"]):not([type="radio"]),
+.admin-portal-wrapper form select,
+.admin-portal-wrapper form textarea {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+.admin-portal-wrapper input:focus,
+.admin-portal-wrapper select:focus,
+.admin-portal-wrapper textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* High contrast placeholders */
+.admin-portal-wrapper input::placeholder,
+.admin-portal-wrapper textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Visible select options */
+.admin-portal-wrapper select option {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+}
+
+/* High contrast labels */
+.admin-portal-wrapper label {
+  color: #1e293b !important;
+}
+
+/* High contrast dark section styling */
+.admin-portal-wrapper .admin-login-card input {
+  color: #ffffff !important;
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.admin-portal-wrapper .admin-login-card input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* High contrast table styling */
+.admin-portal-wrapper table th {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+.admin-portal-wrapper table td {
+  color: #1e293b !important;
+}
